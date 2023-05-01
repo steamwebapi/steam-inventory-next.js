@@ -12,22 +12,17 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
     const [error, setError] = useState("");
 
     useEffect(() => {
-        console.log(inventory, profile, 'inventory-profile');
-
         // Sum all the prices from inventory
         let total = 0;
         if (inventory === null) {
             setError("Inventory not found");
             return;
-        }
-        ;
+        };
 
         if (inventoryStatus !== 200) {
             setError(inventory.error);
         }
 
-
-        console.log(inventoryStatus, 'inventoryStatus');
         if (inventoryStatus === 200) {
             setError(inventory.error);
             inventory.forEach(item => {
@@ -50,48 +45,56 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
 `}
         >
             <Screen>
-                <div className="flex flex-col items-start justify-center w-full">
-                    <div className="flex flex-row bg-gray-800 w-full p-10 gap-4 justify-center">
-                        <div className="flex items-center">
-                            <button className="btn btn-primary flex flex-row gap-1"
-                                    onClick={() => window.history.back()}>
+                <div className="flex flex-col items-start justify-center w-full bg-gray-800">
+                    <div className="flex flex-col w-full px-10 pt-10 pb-8 gap-4 justify-start">
+                        <div className="flex flex-col lg:flex-row  items-center gap-2 lg:gap-10 text-gray-700">
+                            <button
+                                className="btn btn-primary bg-gray-700 border-gray-600 flex flex-row gap-1  rounded w-48"
+                                onClick={() => window.history.back()}>
                                 <ArrowLeftIcon className="w-6 h-6"/>
                                 BACK
                             </button>
+                            <span>
+                                {profile.profileurl}
+                            </span>
+                            <span>
+                                {profile.steamid}
+                            </span>
                         </div>
-                        <img src={profile.avatarfull} alt="Profile Logo" className="rounded"/>
-                        <div className="profile-name flex flex-start items-start flex-col gap-2">
-                            <h1 className="text-3xl font-bold text-white w-full">
-                                Inventory from <a href={profile.profileurl} target="_blank"
-                                                  className="underline">{profile.personaname}</a>
-                            </h1>
-                            {profile.personastateflags === 1 && (
-                                <span className="flag country flex gap-4 items-center justify-start text-white text-xl">
+                        <div className="flex flex-row gap-2">
+                            <img src={profile.avatarfull} alt="Profile Logo" className="rounded w-48 h-48"/>
+                            <div className="profile-name flex justify-center items-start flex-col gap-2 ml-4">
+                                <h1 className="text-2xl font-bold text-white w-full">
+                                    Inventory from <a href={profile.profileurl} target="_blank"
+                                                      className="underline">{profile.personaname}</a>
+                                </h1>
+                                {profile.personastateflags === 1 && (
+                                    <span
+                                        className="flag country flex gap-4 items-center justify-start text-white text-xl">
                                 <img
                                     src={`https://flagsapi.com/${profile.loccountrycode}/flat/32.png`}/> {profile.loccountrycode}
                             </span>
-                            )}
-                            <span className="createdAt text-gray-500 text-base moment-js">
+                                )}
+                                <span className="createdAt text-gray-500 text-base moment-js">
                                 Since: {moment(profile.timecreated * 1000).fromNow()}
                             </span>
-                            <span className="online-or-offline text-gray-500 text-base">
+                                <span className="online-or-offline text-gray-500 text-base">
                                 {profile.personastate === 0 ? 'Offline' : 'Online'}
                             </span>
-                            <span className="total-worth text-2xl text-white font-bold">
+                                <span className="total-worth text-xl text-white font-bold">
                                 Total Worth: {totalWorth}$
                             </span>
+                            </div>
                         </div>
                     </div>
                     {error === "" ?
                         <div
                             className="text-red-400 text-3xl font-bold flex justify-center mt-40 w-full">{error}</div> :
-                        <div className=" bg-gray-950 border-gray-900 border-t-8 w-full">
+                        <div className="bg-gray-800 w-full mb-40">
                             {inventory && inventory.length > 0 ? (
-                                <div className="flex flex-row flex-wrap gap-4 p-10 justify-center">
+                                <div className="flex flex-col flex-wrap px-8 justify-start lg:flex-row">
                                     {inventory.map((item, index) => (
-                                        <>
-                                            <InventoryItem item={item}/>
-                                        </>
+                                        <InventoryItem item={item}/>
                                     ))}
                                 </div>
                             ) : (
@@ -125,7 +128,7 @@ export const getServerSideProps = async (context) => {
     const profileStatus = profileResponse.status;
     const profile = await profileResponse.json();
 
-    if(profileStatus !== 200) {
+    if (profileStatus !== 200) {
         // send 404 page
         return {
             notFound: true,
