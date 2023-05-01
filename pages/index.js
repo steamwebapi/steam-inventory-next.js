@@ -4,6 +4,7 @@ import Input from "@/components/input"
 import {useState} from "react";
 import clsx from "clsx";
 import {MagnifyingGlassIcon} from "@heroicons/react/20/solid";
+import Head from "next/head";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -46,6 +47,10 @@ export default function Home() {
             className={`flex min-h-screen flex-col items-center ${inter.className}">
 `}
         >
+            <Head>
+                <title>Steam Inventory Worth Calculator</title>
+                <meta name="description" content="Steam Inventory Worth Calculator"/>
+            </Head>
             <Screen loading={loading}>
                 <div className="flex flex-col w-full gap-20 items-center">
                     <div className="flex justify-center w-full mt-20 ">

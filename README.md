@@ -26,6 +26,11 @@ yarn dev
 pnpm dev
 ```
 
+## Error
+
+If you dont have an API KEY you will become this error, be careful that a API KEY is exists in .env
+![img.png](img.png)
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Built With
