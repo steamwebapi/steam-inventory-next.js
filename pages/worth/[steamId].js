@@ -26,6 +26,8 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
             setError(inventory.error);
         }
 
+
+        console.log(inventoryStatus, 'inventoryStatus');
         if (inventoryStatus === 200) {
             setError(inventory.error);
             inventory.forEach(item => {

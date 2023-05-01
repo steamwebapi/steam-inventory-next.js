@@ -29,7 +29,16 @@ export default function Home() {
             const res = await fetch('/api/form?identifier=' + encodeURI(identifier));
             const data = await res.json();
 
+            if(res.status === 401) {
+                console.log('#################### API KEY IS NOT VALID ####################');
+            }
+
+            if(res.status === 429) {
+                console.log('################# API LIMITS REACHED #################');
+            }
+
             if (res.status === 404) {
+                console.log('#################### PROFILE NOT FOUND ####################');
                 setError(data.message);
             }
 
