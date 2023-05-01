@@ -8,6 +8,12 @@ Its a Free Steam Api Service that provides the prices of each item in the Steam 
 ## Live here
 https://inventory.steamwebapi.com
 
+## Todos & Wishes (Feel free to contribute)
+- Add History of last crawled Inventories with MonogoDB or something else
+- Better SEO for all
+- Better Mobile Support
+- Inspect Items in Inventory
+
 ## You can also use the API
 Just go to www.steamwebapi.com and use the API for free.
 

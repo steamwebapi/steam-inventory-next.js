@@ -6,7 +6,7 @@ function InventoryItem(props) {
             <figure className="w-full h-[200px] flex flex-center">
                 <img src={props.item.itemImages[0]} alt="Inventory Image" className="max-w-[200px]"/></figure>
             <div className="card-body">
-                <h2 className="card-title h-[60px] flex flex-start items-start text-white font-bold">
+                <h2 className="card-title text-base h-[60px] flex flex-start items-start text-white">
                     {props.item.marketName}
                 </h2>
                 <div className="card-actions justify-between text-gray-400 flex items-center">

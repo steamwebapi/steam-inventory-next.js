@@ -4,6 +4,8 @@ import {useEffect, useState} from "react";
 import moment from "moment";
 import InventoryItem from "@/components/inventoryItem";
 import {ArrowLeftIcon} from "@heroicons/react/24/solid";
+import Link from "next/link";
+import Head from "next/head";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -17,7 +19,8 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
         if (inventory === null) {
             setError("Inventory not found");
             return;
-        };
+        }
+        ;
 
         if (inventoryStatus !== 200) {
             setError(inventory.error);
@@ -40,20 +43,21 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
     }, [inventory, profile]);
 
     return (
-        <main
-            className={`flex min-h-screen flex-col items-center ${inter.className}">
-`}
-        >
+        <main className={`flex min-h-screen flex-col items-center ${inter.className}">`}>
             <Screen>
+                <Head>
+                    <title>Steam Inventory {profile.personaname}</title>
+                    <meta name="description" content="Steam Inventory from {profile.personaname}"/>
+                </Head>
                 <div className="flex flex-col items-start justify-center w-full bg-gray-800">
                     <div className="flex flex-col w-full px-10 pt-10 pb-8 gap-4 justify-start">
                         <div className="flex flex-col lg:flex-row  items-center gap-2 lg:gap-10 text-gray-700">
-                            <button
+                            <Link
                                 className="btn btn-primary bg-gray-700 border-gray-600 flex flex-row gap-1  rounded w-48"
-                                onClick={() => window.history.back()}>
+                                href="/">
                                 <ArrowLeftIcon className="w-6 h-6"/>
                                 BACK
-                            </button>
+                            </Link>
                             <span>
                                 {profile.profileurl}
                             </span>
@@ -66,7 +70,7 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
                             <div className="profile-name flex justify-center items-start flex-col gap-2 ml-4">
                                 <h1 className="text-2xl font-bold text-white w-full">
                                     Inventory from <a href={profile.profileurl} target="_blank"
-                                                      className="underline">{profile.personaname}</a>
+                                       className="underline inline">{profile.personaname}</a>
                                 </h1>
                                 {profile.personastateflags === 1 && (
                                     <span
@@ -111,7 +115,6 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
     )
 }
 
-
 export const getServerSideProps = async (context) => {
     const {steamId} = context.params;
 
@@ -120,7 +123,6 @@ export const getServerSideProps = async (context) => {
     const inventoryResponse = await fetch(inventoryApi);
     const inventoryStatus = inventoryResponse.status;
     const inventory = await inventoryResponse.json();
-
 
     // https://www.steamwebapi.com/steam/api/profile
     const profileApi = `${process.env.BASE_API_URL}profile?key=${process.env.BASE_API_KEY}&steam_id=${steamId}`;
