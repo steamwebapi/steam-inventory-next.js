@@ -98,7 +98,7 @@ export default function Home() {
                             Its Open Source!
                         </h1>
                         <p className="text-white text-lg">
-                            This project is open source and you can find it on <Link target="_blank" href=""
+                            This project is open source and you can find it on <Link target="_blank" href="https://github.com/steamwebapi/steam-inventory-next.js"
                                                                                   className="underline text-bold">
                             Github</Link>. Feel free to contribute to the project.
                         </p>
