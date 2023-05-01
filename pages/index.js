@@ -5,6 +5,7 @@ import {useState} from "react";
 import clsx from "clsx";
 import {MagnifyingGlassIcon} from "@heroicons/react/20/solid";
 import Head from "next/head";
+import Link from "next/link";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -87,9 +88,9 @@ export default function Home() {
                         </h1>
                         <p className="text-white text-lg">
                             This is a simple tool to calculate the worth of your steam inventory. It is not 100%
-                            accurate but it is close enough. It uses the API from <a target="_blank"
+                            accurate but it is close enough. It uses the API from <Link target="_blank"
                                                                                      href="https://www.steamwebapi.com"
-                                                                                     className="underline text-bold">www.steamwebapi.com</a> to
+                                                                                     className="underline text-bold">www.steamwebapi.com</Link> to
                             get the prices of the
                             items in your inventory. It is not affiliated with Valve or Steam in any way.
                         </p>
@@ -97,17 +98,17 @@ export default function Home() {
                             Its Open Source!
                         </h1>
                         <p className="text-white text-lg">
-                            This project is open source and you can find it on <a target="_blank" href=""
+                            This project is open source and you can find it on <Link target="_blank" href=""
                                                                                   className="underline text-bold">
-                            Github</a>. Feel free to contribute to the project.
+                            Github</Link>. Feel free to contribute to the project.
                         </p>
                         <h1 className="text-4xl font-bold text-left text-white w-3/4 mt-10">
                             Come to the Discord!
                         </h1>
                         <p className="text-white text-lg">
-                            If you have any questions or suggestions, feel free to join the <a target="_blank"
+                            If you have any questions or suggestions, feel free to join the <Link target="_blank"
                                                                                                href="https://discord.com/invite/N5yWqRYzEr"
-                                                                                               className="underline text-bold">Discord</a>
+                                                                                               className="underline text-bold">Discord</Link>
                         </p>
                     </div>
                 </div>
