@@ -1,7 +1,7 @@
 import React from 'react';
 
 function InventoryItem(props) {
-    return <div className="w-full lg:w-1/6">
+    return <div className="w-full lg:w-1/5">
         <div className="card bg-gray-900 shadow-xl m-2 rounded">
             <figure className="w-full h-[200px] flex flex-center">
                 <img src={props.item.itemImages[0]} alt="Inventory Image" className="max-w-[200px]"/></figure>

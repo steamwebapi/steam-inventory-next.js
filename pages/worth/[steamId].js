@@ -1,46 +1,65 @@
 import {Inter} from 'next/font/google'
 import Screen from "@/components/screen"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import moment from "moment";
 import InventoryItem from "@/components/inventoryItem";
 import {ArrowLeftIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Head from "next/head";
+import {Spinner} from "@chakra-ui/react";
 
 const inter = Inter({subsets: ['latin']})
 
-export default function SteamId({inventory, profile, inventoryStatus, profileStatus}) {
+export default function SteamId({profile, profileStatus, steamId}) {
     const [totalWorth, setTotalWorth] = useState(0);
     const [error, setError] = useState("");
+    const [inventory, setInventory] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const fetchInventory = async () => {
+        const res = await fetch('/api/inventory?steamId=' + encodeURIComponent(steamId));
+
+        if (res.status === 401) {
+            console.log('#################### API KEY IS NOT VALID ####################');
+        }
+
+        if (res.status === 429) {
+            console.log('################# API LIMITS REACHED #################');
+        }
+
+        if (res.status === 200) {
+            return await res.json();
+        }
+    }
 
     useEffect(() => {
-        // Sum all the prices from inventory
-        let total = 0;
-        if (inventory === null) {
-            setError("Inventory not found");
-            return;
-        }
-        ;
 
-        if (inventoryStatus !== 200) {
-            setError(inventory.error);
-        }
+        fetchInventory().then(data => {
 
-        if (inventoryStatus === 200) {
-            setError(inventory.error);
-            inventory.forEach(item => {
+            if (!data || data.length === 0) {
+                setError("Inventory is private");
+                setLoading(false);
+                return;
+            }
+
+            // sort the inventory array by price
+            data.sort((a, b) => {
+                return b.priceLatest - a.priceLatest;
+            });
+
+            setInventory(data);
+
+            let total = 0;
+            data.forEach(item => {
                 total += parseFloat(item.priceLatest);
             });
 
-            setTotalWorth(total.toFixed(2));
+            setLoading(false);
+            setTotalWorth(total);
+        });
 
-            // sort the inventory array by price
-            inventory.sort((a, b) => {
-                return b.priceLatest - a.priceLatest;
-            });
-        }
-
-    }, [inventory, profile]);
+        console.log('#################### USE EFFECT ####################');
+    }, []);
 
     return (
         <main className={`flex min-h-screen flex-col items-center ${inter.className}">`}>
@@ -70,7 +89,7 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
                             <div className="profile-name flex justify-center items-start flex-col gap-2 ml-4">
                                 <h1 className="text-2xl font-bold text-white w-full">
                                     Inventory from <a href={profile.profileurl} target="_blank"
-                                       className="underline inline">{profile.personaname}</a>
+                                                      className="underline inline">{profile.personaname}</a>
                                 </h1>
                                 {profile.personastateflags === 1 && (
                                     <span
@@ -91,24 +110,33 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
                             </div>
                         </div>
                     </div>
-                    {error === "" ?
+
+                    {!loading && inventory && inventory.length > 0 && (
+                        <div className="flex flex-col flex-wrap px-8 justify-start lg:flex-row">
+                            {inventory.map((item, index) => (
+                                <InventoryItem item={item}/>
+                            ))}
+                        </div>
+                    )}
+
+                    {loading && (
                         <div
-                            className="text-red-400 text-3xl font-bold flex justify-center mt-40 w-full">{error}</div> :
-                        <div className="bg-gray-800 w-full mb-40">
-                            {inventory && inventory.length > 0 ? (
-                                <div className="flex flex-col flex-wrap px-8 justify-start lg:flex-row">
-                                    {inventory.map((item, index) => (
-                                        <InventoryItem item={item}/>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="flex flex-row flex-wrap gap-4 p-10 justify-center">
-                                    <h1 className="text-3xl font-bold text-white w-full text-center">
-                                        No items found
-                                    </h1>
-                                </div>
-                            )}
-                        </div>}
+                            className="flex flex-col items-center justify-start w-full min-h-screen h-full bg-gray-900">
+                            <Spinner size="xl" color='blue.500' className="mt-12"/>
+                        </div>
+                    )}
+
+                    {!loading && inventory && inventory.length === 0 && (
+                        <div className="flex flex-col items-center justify-center w-full h-full">
+                            <h2 className="text-center text-white text-xl font-bold mt-4">No items found</h2>
+                        </div>
+                    )}
+
+                    {!loading && error && (
+                        <div className="flex flex-col items-center justify-center w-full h-full mb-20">
+                            <h2 className="text-center text-white text-xl font-bold mt-4">{error}</h2>
+                        </div>
+                    )}
                 </div>
             </Screen>
         </main>
@@ -117,12 +145,6 @@ export default function SteamId({inventory, profile, inventoryStatus, profileSta
 
 export const getServerSideProps = async (context) => {
     const {steamId} = context.params;
-
-    // https://www.steamwebapi.com/steam/api/inventory
-    const inventoryApi = `${process.env.BASE_API_URL}inventory?key=${process.env.BASE_API_KEY}&steam_id=${steamId}&parse=1`;
-    const inventoryResponse = await fetch(inventoryApi);
-    const inventoryStatus = inventoryResponse.status;
-    const inventory = await inventoryResponse.json();
 
     // https://www.steamwebapi.com/steam/api/profile
     const profileApi = `${process.env.BASE_API_URL}profile?key=${process.env.BASE_API_KEY}&steam_id=${steamId}`;
@@ -138,5 +160,5 @@ export const getServerSideProps = async (context) => {
     }
 
     // Pass data to the page via props
-    return {props: {inventory, profile, inventoryStatus, profileStatus}}
+    return {props: {profile, profileStatus, steamId}}
 };
