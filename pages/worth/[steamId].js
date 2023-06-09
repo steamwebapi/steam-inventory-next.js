@@ -55,7 +55,7 @@ export default function SteamId({profile, profileStatus, steamId}) {
             });
 
             setLoading(false);
-            setTotalWorth(total);
+            setTotalWorth(total.toFixed(2));
         });
 
         console.log('#################### USE EFFECT ####################');

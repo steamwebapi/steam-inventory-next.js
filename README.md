@@ -42,3 +42,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Tailwind CSS - A utility-first CSS framework for rapidly building custom designs
 - Chakra UI - A simple, modular and accessible component library that gives you the building blocks you need to build your React applications
 - DaisyUI - A component library for Tailwind CSS & React
+
+
+## ON ERROR - Vercel Edge Functions
+This Project use Vercel Edge Functions, that means that the API KEY is not visible in the Frontend. And you need to add the
+.env variables to the Vercel Project on vercel.com.
