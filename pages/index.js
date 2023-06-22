@@ -29,11 +29,11 @@ export default function Home() {
             const res = await fetch('/api/form?identifier=' + encodeURI(identifier));
             const data = await res.json();
 
-            if(res.status === 401) {
+            if (res.status === 401) {
                 console.log('#################### API KEY IS NOT VALID ####################');
             }
 
-            if(res.status === 429) {
+            if (res.status === 429) {
                 console.log('################# API LIMITS REACHED #################');
             }
 
@@ -92,14 +92,21 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="flex flex-col items-start mx-4 lg:mx-20 gap-4 max-w-3xl mb-80">
-                        <h1 className="text-4xl font-bold text-left text-white w-3/4">
+                        <h1 className="text-4xl font-bold text-left text-white w-3/4">www.csgoskinprice.com</h1>
+                        <p className="text-white text-lg">
+                            New Name, Open Source and more! Check your CS:GO Inventory Worth now! Be careful, that we
+                            use
+                            only
+                            the Steam Market prices, so the real worth of your inventory can be higher or lower.
+                        </p>
+                        <h1 className="text-4xl font-bold text-left text-white w-3/4 mt-10">
                             What is this?
                         </h1>
                         <p className="text-white text-lg">
                             This is a simple tool to calculate the worth of your steam inventory. It is not 100%
                             accurate but it is close enough. It uses the API from <Link target="_blank"
-                                                                                     href="https://www.steamwebapi.com"
-                                                                                     className="underline text-bold">www.steamwebapi.com</Link> to
+                                                                                        href="https://www.steamwebapi.com"
+                                                                                        className="underline text-bold">www.steamwebapi.com</Link> to
                             get the prices of the
                             items in your inventory. It is not affiliated with Valve or Steam in any way.
                         </p>
@@ -107,8 +114,9 @@ export default function Home() {
                             Its Open Source!
                         </h1>
                         <p className="text-white text-lg">
-                            This project is open source and you can find it on <Link target="_blank" href="https://github.com/steamwebapi/steam-inventory-next.js"
-                                                                                  className="underline text-bold">
+                            This project is open source and you can find it on <Link target="_blank"
+                                                                                     href="https://github.com/steamwebapi/steam-inventory-next.js"
+                                                                                     className="underline text-bold">
                             Github</Link>. Feel free to contribute to the project.
                         </p>
                         <h1 className="text-4xl font-bold text-left text-white w-3/4 mt-10">
@@ -116,8 +124,8 @@ export default function Home() {
                         </h1>
                         <p className="text-white text-lg">
                             If you have any questions or suggestions, feel free to join the <Link target="_blank"
-                                                                                               href="https://discord.com/invite/N5yWqRYzEr"
-                                                                                               className="underline text-bold">Discord</Link>
+                                                                                                  href="https://discord.com/invite/N5yWqRYzEr"
+                                                                                                  className="underline text-bold">Discord</Link>
                         </p>
                     </div>
                 </div>

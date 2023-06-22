@@ -44,14 +44,14 @@ export default function SteamId({profile, profileStatus, steamId}) {
 
             // sort the inventory array by price
             data.sort((a, b) => {
-                return b.priceLatest - a.priceLatest;
+                return b.price - a.price;
             });
 
             setInventory(data);
 
             let total = 0;
             data.forEach(item => {
-                total += parseFloat(item.priceLatest);
+                total += parseFloat(item.price);
             });
 
             setLoading(false);
