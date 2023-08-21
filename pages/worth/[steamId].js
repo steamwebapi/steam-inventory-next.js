@@ -20,6 +20,7 @@ export default function SteamId({profile, profileStatus, steamId}) {
         const res = await fetch('/api/inventory?steamId=' + encodeURIComponent(steamId));
 
         if (res.status === 401) {
+            alert('is it your first time here? please add your api key in the .env file');
             console.log('#################### API KEY IS NOT VALID ####################');
         }
 
