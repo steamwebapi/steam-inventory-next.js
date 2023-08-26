@@ -31,6 +31,7 @@ export default function Home() {
 
             if (res.status === 401) {
                 console.log('#################### API KEY IS NOT VALID ####################');
+                alert('Its your first time here? API Key is not valid. Please check your API Key in the .env file. You can take a API Key from steamwebapi.com')
             }
 
             if (res.status === 429) {
@@ -92,12 +93,13 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="flex flex-col items-start mx-4 lg:mx-20 gap-4 max-w-3xl mb-80">
-                        <h1 className="text-4xl font-bold text-left text-white w-3/4">www.csgoskinprice.com</h1>
+                        <h1 className="text-4xl font-bold text-left text-white w-3/4">www.csbackpack.net</h1>
                         <p className="text-white text-lg">
+                            Check this Version: <a href="https://www.csbackpack.net" target="_blank"
+                                                   className="btn btn-default">New Version</a><br/><br/>
                             New Name, Open Source and more! Check your CS:GO Inventory Worth now! Be careful, that we
-                            use
-                            only
-                            the Steam Market prices, so the real worth of your inventory can be higher or lower.
+                            use only the Steam Market prices, so the real worth of your inventory can be higher or
+                            lower.
                         </p>
                         <h1 className="text-4xl font-bold text-left text-white w-3/4 mt-10">
                             What is this?
@@ -107,8 +109,8 @@ export default function Home() {
                             accurate but it is close enough. It uses the API from <Link target="_blank"
                                                                                         href="https://www.steamwebapi.com"
                                                                                         className="underline text-bold">www.steamwebapi.com</Link> to
-                            get the prices of the
-                            items in your inventory. It is not affiliated with Valve or Steam in any way.
+                            get the prices of the items in your inventory. It is not affiliated with Valve or Steam in
+                            any way. The Power of Inventory API, that you can use for free.
                         </p>
                         <h1 className="text-4xl font-bold text-left text-white w-3/4 mt-10">
                             Its Open Source!
