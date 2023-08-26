@@ -5,8 +5,10 @@ This project is a simple web app that calculates the total worth of a Steam user
 It uses the [steamwebapi.com](https://www.steamwebapi.com) to fetch the prices of each item and fetch the Inventory.
 Its a Free Steam Api Service that provides the prices of each item in the Steam Community Market.
 
-## Live here
-https://inventory.steamwebapi.com
+## Live / Demo here
+https://www.csbackpack.net [From Forked Repo (not related with us)]
+
+https://inventory.steamwebapi.com [From Original Repo]
 
 ## Todos & Wishes (Feel free to contribute)
 - Add History of last crawled Inventories with MonogoDB or something else
