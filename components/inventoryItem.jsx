@@ -4,7 +4,7 @@ function InventoryItem(props) {
     return <div className="w-full lg:w-1/5">
         <div className="card bg-gray-900 shadow-xl m-2 rounded">
             <figure className="w-full h-[200px] flex flex-center">
-                <img src={props.item.itemimages[0]} alt="Inventory Image" className="max-w-[200px]"/></figure>
+                <img src={props.item.image} alt="Inventory Image" className="max-w-[200px]"/></figure>
             <div className="card-body">
                 <h2 className="card-title text-base h-[60px] flex flex-start items-start text-white">
                     {props.item.markethashname}

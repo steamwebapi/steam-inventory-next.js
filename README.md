@@ -10,7 +10,7 @@ https://www.csbackpack.net [From Forked Repo (not related with us)]
 
 https://inventory.steamwebapi.com [From Original Repo]
 
-## Todos & Wishes (Feel free to contribute)
+## Todos & Wishes (Feel free to contribute)n
 - Add History of last crawled Inventories with MonogoDB or something else
 - Better SEO for all
 - Better Mobile Support

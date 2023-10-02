@@ -52,7 +52,7 @@ export default function SteamId({profile, profileStatus, steamId}) {
 
             let total = 0;
             data.forEach(item => {
-                total += parseFloat(item.price);
+                total += parseFloat(item.pricelatest);
             });
 
             setLoading(false);
